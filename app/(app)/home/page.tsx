@@ -13,7 +13,7 @@ export default async function HomePage() {
       <Card className="space-y-8">
         <div>
           <p className="text-sm uppercase tracking-[0.24em] text-muted">{getGreeting()}</p>
-          <h2 className="mt-2 max-w-xl text-4xl font-semibold leading-tight">
+          <h2 className="mt-2 max-w-xl text-3xl font-semibold leading-tight sm:text-4xl">
             Build clarity and momentum one honest reflection at a time.
           </h2>
           {!hasActivity ? (
@@ -23,10 +23,10 @@ export default async function HomePage() {
           ) : null}
         </div>
 
-        <section className="space-y-4 rounded-[28px] border border-border bg-panelAlt p-6">
+        <section className="space-y-4 rounded-[28px] border border-border bg-panelAlt p-5 sm:p-6">
           <div>
             <p className="text-sm uppercase tracking-[0.24em] text-muted">Daily Pulse</p>
-            <h3 className="mt-2 text-2xl font-medium">Two minutes to notice where you are.</h3>
+            <h3 className="mt-2 text-xl font-medium sm:text-2xl">Two minutes to notice where you are.</h3>
             {checkIns.length === 0 ? (
               <p className="mt-2 text-sm leading-6 text-muted">
                 Your first check-in creates the baseline for mood, energy, and stress trends.
@@ -38,11 +38,11 @@ export default async function HomePage() {
           </ButtonLink>
         </section>
 
-        <section className="space-y-4 rounded-[28px] border border-border bg-panelAlt p-6">
+        <section className="space-y-4 rounded-[28px] border border-border bg-panelAlt p-5 sm:p-6">
           <div>
             <p className="text-sm uppercase tracking-[0.24em] text-muted">Next Session</p>
-            <h3 className="mt-2 text-2xl font-medium">Foundation 30</h3>
-            <p className="mt-2 text-lg text-text">
+            <h3 className="mt-2 text-xl font-medium sm:text-2xl">Foundation 30</h3>
+            <p className="mt-2 text-base text-text sm:text-lg">
               Session {nextSession.order}: {nextSession.title}
             </p>
             {completions.length === 0 ? (
@@ -60,16 +60,16 @@ export default async function HomePage() {
       <Card className="space-y-6">
         <div>
           <p className="text-sm uppercase tracking-[0.24em] text-muted">Progress Summary</p>
-          <h3 className="mt-2 text-2xl font-medium">Your consistency so far.</h3>
+          <h3 className="mt-2 text-xl font-medium sm:text-2xl">Your consistency so far.</h3>
         </div>
         <div className="grid gap-4">
           <div className="rounded-[28px] border border-border bg-panelAlt p-5">
             <p className="text-sm text-muted">Sessions completed</p>
-            <p className="mt-3 text-4xl font-semibold">{completions.length}</p>
+            <p className="mt-3 text-3xl font-semibold sm:text-4xl">{completions.length}</p>
           </div>
           <div className="rounded-[28px] border border-border bg-panelAlt p-5">
             <p className="text-sm text-muted">Daily check-ins completed</p>
-            <p className="mt-3 text-4xl font-semibold">{checkIns.length}</p>
+            <p className="mt-3 text-3xl font-semibold sm:text-4xl">{checkIns.length}</p>
           </div>
           {!hasActivity ? (
             <div className="rounded-[28px] border border-dashed border-border bg-panelAlt p-5 text-sm leading-7 text-muted">

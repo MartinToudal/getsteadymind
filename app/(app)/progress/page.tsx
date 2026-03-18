@@ -13,11 +13,11 @@ export default async function ProgressPage() {
       <div className="grid gap-4 md:grid-cols-2">
         <Card>
           <p className="text-sm uppercase tracking-[0.24em] text-muted">Sessions completed</p>
-          <p className="mt-4 text-5xl font-semibold">{progress.sessionsCompleted}</p>
+          <p className="mt-4 text-4xl font-semibold sm:text-5xl">{progress.sessionsCompleted}</p>
         </Card>
         <Card>
           <p className="text-sm uppercase tracking-[0.24em] text-muted">Daily check-ins completed</p>
-          <p className="mt-4 text-5xl font-semibold">{progress.checkInsCompleted}</p>
+          <p className="mt-4 text-4xl font-semibold sm:text-5xl">{progress.checkInsCompleted}</p>
         </Card>
       </div>
       {hasProgress ? (

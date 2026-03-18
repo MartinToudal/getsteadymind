@@ -9,7 +9,7 @@ export function Card({
   children: ReactNode;
 }>) {
   return (
-    <div className={cn("rounded-[28px] border border-border bg-panel/90 p-6 shadow-calm backdrop-blur", className)}>
+    <div className={cn("rounded-[28px] border border-border bg-panel/90 p-5 shadow-calm backdrop-blur sm:p-6", className)}>
       {children}
     </div>
   );

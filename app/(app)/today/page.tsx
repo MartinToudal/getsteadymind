@@ -12,7 +12,7 @@ export default async function TodayPage() {
       <Card className="flex flex-col justify-between gap-6">
         <div>
           <p className="text-sm uppercase tracking-[0.24em] text-muted">Quick Check-In</p>
-          <h1 className="mt-2 text-3xl font-semibold">Daily Pulse</h1>
+          <h1 className="mt-2 text-2xl font-semibold sm:text-3xl">Daily Pulse</h1>
           <p className="mt-3 max-w-md text-sm leading-7 text-muted">
             Capture mood, energy, stress, and one short reflection in under two minutes.
           </p>
@@ -26,8 +26,8 @@ export default async function TodayPage() {
       <Card className="flex flex-col justify-between gap-6">
         <div>
           <p className="text-sm uppercase tracking-[0.24em] text-muted">Guided Session</p>
-          <h1 className="mt-2 text-3xl font-semibold">Foundation 30</h1>
-          <p className="mt-3 text-lg text-text">
+          <h1 className="mt-2 text-2xl font-semibold sm:text-3xl">Foundation 30</h1>
+          <p className="mt-3 text-base text-text sm:text-lg">
             Session {nextSession.order}: {nextSession.title}
           </p>
           <p className="mt-3 max-w-md text-sm leading-7 text-muted">
