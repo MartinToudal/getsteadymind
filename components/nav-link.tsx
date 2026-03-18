@@ -12,7 +12,7 @@ export function NavLink({ href, label }: { href: string; label: string }) {
     <Link
       href={href}
       className={cn(
-        "rounded-full px-4 py-2 text-sm transition",
+        "inline-flex min-h-11 items-center justify-center rounded-full px-4 py-2 text-center text-sm transition",
         isActive ? "bg-accentSoft text-accent" : "text-muted hover:text-text",
       )}
     >
