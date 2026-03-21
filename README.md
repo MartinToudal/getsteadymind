@@ -39,6 +39,18 @@ Use these values:
 npm run dev
 ```
 
+5. Optional local verification:
+
+```bash
+npm run typecheck
+npm run build
+```
+
+Notes:
+
+- `npm run typecheck` now generates Next route types before running TypeScript, so local checks are more stable.
+- If `npm run build` behaves strangely while a dev server is running, stop the dev server first and run the build again. Both commands use the same `.next` directory locally.
+
 ## Vercel deployment
 
 SteadyMind is now set up so the production runtime only needs the two public Supabase values.
