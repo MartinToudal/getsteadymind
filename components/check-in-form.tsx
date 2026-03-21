@@ -14,7 +14,7 @@ function SubmitButton() {
 
   return (
     <Button type="submit" disabled={pending}>
-      {pending ? "Saving..." : "Complete check-in"}
+      {pending ? "Saving..." : "Complete Daily Pulse"}
     </Button>
   );
 }
@@ -48,7 +48,10 @@ export function CheckInForm({ prompt }: { prompt: string }) {
       <Card className="mx-auto max-w-2xl p-8">
         <div className="space-y-4">
           <p className="text-sm uppercase tracking-[0.24em] text-muted">Daily Pulse</p>
-          <h1 className="text-3xl font-semibold">Nice work. You took a moment to check in.</h1>
+          <h1 className="text-3xl font-semibold">Nice work. You noticed where you are.</h1>
+          <p className="max-w-xl text-sm leading-7 text-muted">
+            A short check-in is enough. Clarity grows from small, honest moments like this.
+          </p>
           <ButtonLink href="/home" className="mt-4">
             Return to Home
           </ButtonLink>
@@ -63,6 +66,9 @@ export function CheckInForm({ prompt }: { prompt: string }) {
         <div>
           <p className="text-sm uppercase tracking-[0.24em] text-muted">Daily Pulse</p>
           <h1 className="mt-2 text-3xl font-semibold">Quick check-in</h1>
+          <p className="mt-2 max-w-xl text-sm leading-6 text-muted">
+            Take two minutes to notice, name, and lightly reflect. You do not need the perfect answer.
+          </p>
         </div>
         <span className="text-sm text-muted">Step {step} of 5</span>
       </div>
@@ -70,7 +76,7 @@ export function CheckInForm({ prompt }: { prompt: string }) {
       {step === 1 ? (
         <div className="space-y-5">
           <div>
-            <h2 className="text-2xl font-medium">Mood</h2>
+            <h2 className="text-2xl font-medium">Notice</h2>
             <p className="mt-2 text-sm leading-6 text-muted">How are you feeling right now?</p>
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
@@ -96,8 +102,8 @@ export function CheckInForm({ prompt }: { prompt: string }) {
       {step === 2 ? (
         <div className="space-y-5">
           <div>
-            <h2 className="text-2xl font-medium">Energy</h2>
-            <p className="mt-2 text-sm leading-6 text-muted">How much energy do you have today?</p>
+            <h2 className="text-2xl font-medium">Name</h2>
+            <p className="mt-2 text-sm leading-6 text-muted">How much energy do you have available today?</p>
           </div>
           <div className="grid gap-3 sm:grid-cols-3">
             {ENERGY_OPTIONS.map((option) => (
@@ -121,8 +127,8 @@ export function CheckInForm({ prompt }: { prompt: string }) {
       {step === 3 ? (
         <div className="space-y-5">
           <div>
-            <h2 className="text-2xl font-medium">Stress</h2>
-            <p className="mt-2 text-sm leading-6 text-muted">What is your stress level right now?</p>
+            <h2 className="text-2xl font-medium">Pressure</h2>
+            <p className="mt-2 text-sm leading-6 text-muted">How much pressure or stress are you carrying right now?</p>
           </div>
           <div className="grid gap-3 sm:grid-cols-3">
             {STRESS_OPTIONS.map((option) => (
@@ -146,7 +152,7 @@ export function CheckInForm({ prompt }: { prompt: string }) {
       {step === 4 ? (
         <div className="space-y-5">
           <div>
-            <h2 className="text-2xl font-medium">Reflection</h2>
+            <h2 className="text-2xl font-medium">Reflect</h2>
             <p className="mt-2 text-sm leading-6 text-muted">{reflectionPrompt}</p>
           </div>
           <textarea
@@ -166,15 +172,17 @@ export function CheckInForm({ prompt }: { prompt: string }) {
           className="space-y-5"
         >
           <div>
-            <h2 className="text-2xl font-medium">Ready to complete?</h2>
-            <p className="mt-2 text-sm leading-6 text-muted">You can submit your Daily Pulse now.</p>
+            <h2 className="text-2xl font-medium">Complete</h2>
+            <p className="mt-2 text-sm leading-6 text-muted">
+              Take one last glance. The goal is not to fix everything, only to orient yourself honestly.
+            </p>
           </div>
           <input type="hidden" name="mood" value={mood ?? ""} />
           <input type="hidden" name="energy" value={energy} />
           <input type="hidden" name="stress" value={stress} />
           <input type="hidden" name="reflectionText" value={reflectionText} />
           <div className="rounded-3xl border border-border bg-panelAlt p-5 text-sm leading-7 text-muted">
-            <p>Mood: {mood}</p>
+            <p>Mood: {MOOD_OPTIONS.find((option) => option.value === mood)?.label ?? mood}</p>
             <p>Energy: {energy}</p>
             <p>Stress: {stress}</p>
           </div>
