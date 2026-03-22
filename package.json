@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "next typegen && tsc --noEmit",
+    "build:local": "bash ./scripts/local-build.sh",
+    "verify": "npm run typecheck && npm run build:local",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui"
   },

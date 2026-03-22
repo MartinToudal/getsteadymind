@@ -42,14 +42,14 @@ npm run dev
 5. Optional local verification:
 
 ```bash
-npm run typecheck
-npm run build
+npm run verify
 ```
 
 Notes:
 
 - `npm run typecheck` now generates Next route types before running TypeScript, so local checks are more stable.
-- If `npm run build` behaves strangely while a dev server is running, stop the dev server first and run the build again. Both commands use the same `.next` directory locally.
+- `npm run verify` runs the production build in a temporary working directory, so it is less likely to conflict with a running dev server.
+- `npm run build` remains the normal production-style build command used by Vercel.
 
 ## Vercel deployment
 
