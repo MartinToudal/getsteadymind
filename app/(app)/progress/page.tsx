@@ -10,22 +10,26 @@ export default async function ProgressPage() {
 
   return (
     <div className="space-y-6">
-      <div className="grid gap-4 md:grid-cols-2">
-        <Card>
-          <p className="text-sm uppercase tracking-[0.24em] text-muted">Sessions completed</p>
-          <p className="mt-4 text-4xl font-semibold sm:text-5xl">{progress.sessionsCompleted}</p>
-        </Card>
-        <Card>
-          <p className="text-sm uppercase tracking-[0.24em] text-muted">Daily check-ins completed</p>
-          <p className="mt-4 text-4xl font-semibold sm:text-5xl">{progress.checkInsCompleted}</p>
-        </Card>
-      </div>
       {hasProgress ? (
-        <ProgressCharts
-          moodTrend={progress.moodTrend}
-          energyTrend={progress.energyTrend}
-          stressTrend={progress.stressTrend}
-        />
+        <>
+          <ProgressCharts
+            moodTrend={progress.moodTrend}
+            energyTrend={progress.energyTrend}
+            stressTrend={progress.stressTrend}
+          />
+          <div className="grid gap-4 md:grid-cols-2">
+            <Card>
+              <p className="text-sm uppercase tracking-[0.24em] text-muted">Sessions completed</p>
+              <h2 className="mt-2 text-xl font-medium">Practice volume</h2>
+              <p className="mt-4 text-4xl font-semibold sm:text-5xl">{progress.sessionsCompleted}</p>
+            </Card>
+            <Card>
+              <p className="text-sm uppercase tracking-[0.24em] text-muted">Daily check-ins completed</p>
+              <h2 className="mt-2 text-xl font-medium">Reflection rhythm</h2>
+              <p className="mt-4 text-4xl font-semibold sm:text-5xl">{progress.checkInsCompleted}</p>
+            </Card>
+          </div>
+        </>
       ) : (
         <Card className="space-y-4">
           <p className="text-sm uppercase tracking-[0.24em] text-muted">No progress yet</p>
