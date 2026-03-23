@@ -115,6 +115,67 @@ function buildProgressSnapshot({
   return `${parts.join(", ")}.`;
 }
 
+function average(values: number[]) {
+  if (values.length === 0) {
+    return 0;
+  }
+
+  return values.reduce((sum, value) => sum + value, 0) / values.length;
+}
+
+function buildKeyInsights({
+  moodTrend,
+  energyTrend,
+  stressTrend,
+}: {
+  moodTrend: DataPoint[];
+  energyTrend: DataPoint[];
+  stressTrend: DataPoint[];
+}) {
+  const insights: string[] = [];
+
+  const recentMood = moodTrend.slice(-3).map((point) => point.value);
+  const recentEnergy = energyTrend.slice(-3).map((point) => point.value);
+  const recentStress = stressTrend.slice(-3).map((point) => point.value);
+
+  if (recentStress.length >= 3 && recentStress.every((value) => value >= 2)) {
+    insights.push("Stress has stayed elevated across your last three check-ins.");
+  } else if (recentStress.length >= 3 && recentStress.every((value) => value === 1)) {
+    insights.push("Stress has stayed low across your last three check-ins.");
+  }
+
+  if (recentEnergy.length >= 3 && recentEnergy.every((value) => value === 1)) {
+    insights.push("Energy has been low for three check-ins in a row.");
+  } else if (recentEnergy.length >= 3 && recentEnergy.every((value) => value >= 2)) {
+    insights.push("Energy has stayed fairly available across your recent check-ins.");
+  }
+
+  if (moodTrend.length >= 4) {
+    const earlierMood = moodTrend.slice(-6, -3).map((point) => point.value);
+    const recentMoodAverage = average(recentMood);
+    const earlierMoodAverage = average(earlierMood);
+
+    if (earlierMood.length >= 2 && recentMoodAverage >= earlierMoodAverage + 0.5) {
+      insights.push("Your mood looks better in the most recent check-ins than it did a few entries ago.");
+    } else if (earlierMood.length >= 2 && recentMoodAverage <= earlierMoodAverage - 0.5) {
+      insights.push("Your mood has dipped compared with a few check-ins ago.");
+    }
+  }
+
+  if (recentMood.length >= 3 && recentStress.length >= 3) {
+    const moodDirection = getDirectionLabel(moodTrend);
+    const stressDirection = getDirectionLabel(stressTrend);
+
+    if (moodDirection === "rising" && stressDirection === "falling") {
+      insights.push("Mood is rising while stress is easing, which looks like a healthy shift.");
+    } else if (moodDirection === "falling" && stressDirection === "rising") {
+      insights.push("Mood is slipping while stress is rising, which may be worth paying attention to.");
+    }
+  }
+
+  return insights.slice(0, 3);
+}
+
 export function ProgressCharts({
   moodTrend,
   energyTrend,
@@ -125,6 +186,7 @@ export function ProgressCharts({
   stressTrend: DataPoint[];
 }) {
   const snapshot = buildProgressSnapshot({ moodTrend, energyTrend, stressTrend });
+  const insights = buildKeyInsights({ moodTrend, energyTrend, stressTrend });
 
   return (
     <div className="space-y-4">
@@ -135,6 +197,21 @@ export function ProgressCharts({
             <h2 className="mt-2 text-xl font-medium">Your current pattern.</h2>
           </div>
           <p className="text-sm leading-7 text-muted">{snapshot}</p>
+        </Card>
+      ) : null}
+      {insights.length > 0 ? (
+        <Card className="space-y-3">
+          <div>
+            <p className="text-sm uppercase tracking-[0.24em] text-muted">Key insights</p>
+            <h2 className="mt-2 text-xl font-medium">What stands out right now.</h2>
+          </div>
+          <div className="space-y-3">
+            {insights.map((insight) => (
+              <p key={insight} className="text-sm leading-7 text-muted">
+                {insight}
+              </p>
+            ))}
+          </div>
         </Card>
       ) : null}
       <div className="grid gap-4 lg:grid-cols-3">
