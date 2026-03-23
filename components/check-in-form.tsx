@@ -3,7 +3,12 @@
 import { useActionState, useMemo, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { submitCheckIn } from "@/lib/actions";
-import { ENERGY_OPTIONS, getContextualDailyPulsePrompt, MOOD_OPTIONS, STRESS_OPTIONS } from "@/lib/constants";
+import {
+  ENERGY_OPTIONS,
+  getContextualDailyPulseReflection,
+  MOOD_OPTIONS,
+  STRESS_OPTIONS,
+} from "@/lib/constants";
 import { Button, ButtonLink } from "@/components/button";
 import { Card } from "@/components/card";
 import { EnergyLevel, FormState, StressLevel } from "@/lib/types";
@@ -35,12 +40,16 @@ export function CheckInForm({ prompt }: { prompt: string }) {
     return true;
   }, [energy, mood, reflectionText, step, stress]);
 
-  const reflectionPrompt = useMemo(() => {
+  const reflection = useMemo(() => {
     if (mood === null || !energy || !stress) {
-      return prompt;
+      return {
+        prompt,
+        guidance: "Write a few honest lines about what feels most true for you right now.",
+        focus: "Take your next step from clarity, not pressure.",
+      };
     }
 
-    return getContextualDailyPulsePrompt(mood, energy, stress);
+    return getContextualDailyPulseReflection(mood, energy, stress);
   }, [energy, mood, prompt, stress]);
 
   if (state.success) {
@@ -153,7 +162,8 @@ export function CheckInForm({ prompt }: { prompt: string }) {
         <div className="space-y-5">
           <div>
             <h2 className="text-2xl font-medium">Reflect</h2>
-            <p className="mt-2 text-sm leading-6 text-muted">{reflectionPrompt}</p>
+            <p className="mt-2 text-sm leading-6 text-muted">{reflection.prompt}</p>
+            <p className="mt-3 max-w-xl text-sm leading-6 text-muted">{reflection.guidance}</p>
           </div>
           <textarea
             value={reflectionText}
@@ -161,7 +171,7 @@ export function CheckInForm({ prompt }: { prompt: string }) {
             rows={7}
             disabled={pending}
             className="w-full rounded-[28px] border border-border bg-panelAlt px-4 py-4 text-base outline-none transition focus:border-accent"
-            placeholder="Write a few sentences."
+            placeholder="Write a few honest lines."
           />
         </div>
       ) : null}
@@ -174,7 +184,7 @@ export function CheckInForm({ prompt }: { prompt: string }) {
           <div>
             <h2 className="text-2xl font-medium">Complete</h2>
             <p className="mt-2 text-sm leading-6 text-muted">
-              Take one last glance. The goal is not to fix everything, only to orient yourself honestly.
+              Take one last glance. The goal is not to fix everything, only to leave with a little more direction.
             </p>
           </div>
           <input type="hidden" name="mood" value={mood ?? ""} />
@@ -185,6 +195,9 @@ export function CheckInForm({ prompt }: { prompt: string }) {
             <p>Mood: {MOOD_OPTIONS.find((option) => option.value === mood)?.label ?? mood}</p>
             <p>Energy: {energy}</p>
             <p>Stress: {stress}</p>
+            <p className="mt-3 rounded-2xl border border-border/80 bg-surface px-4 py-3 text-foreground">
+              Today&apos;s orientation: {reflection.focus}
+            </p>
           </div>
           {state.error ? <p className="text-sm text-warning">{state.error}</p> : null}
           <SubmitButton />

@@ -58,6 +58,12 @@ const DAILY_PULSE_PROMPT_GROUPS = {
   ],
 } as const;
 
+type DailyPulseReflection = {
+  prompt: string;
+  guidance: string;
+  focus: string;
+};
+
 function pickPrompt(prompts: readonly string[], mood: number, energy: EnergyLevel, stress: StressLevel) {
   const seed = `${mood}-${energy}-${stress}`;
   const index = Array.from(seed).reduce((total, char) => total + char.charCodeAt(0), 0) % prompts.length;
@@ -82,6 +88,60 @@ export function getContextualDailyPulsePrompt(mood: number, energy: EnergyLevel,
   }
 
   return pickPrompt(DAILY_PULSE_PROMPT_GROUPS.steady, mood, energy, stress);
+}
+
+export function getContextualDailyPulseReflection(
+  mood: number,
+  energy: EnergyLevel,
+  stress: StressLevel,
+): DailyPulseReflection {
+  const prompt = getContextualDailyPulsePrompt(mood, energy, stress);
+
+  if (mood <= 2) {
+    return {
+      prompt,
+      guidance: "Keep it simple. Name what feels most important, and what would help most right now.",
+      focus: "Go gently today. Reduce pressure and choose one supportive next step.",
+    };
+  }
+
+  if (stress === "High") {
+    return {
+      prompt,
+      guidance: "Notice what is creating the most pressure, and what might give you a little more space or calm.",
+      focus: "Protect your attention. Lower unnecessary pressure where you can.",
+    };
+  }
+
+  if (energy === "Low") {
+    return {
+      prompt,
+      guidance: "You do not need to solve everything. Write down what is draining you, and what might make today lighter.",
+      focus: "Work with your energy. Keep today small, clear, and realistic.",
+    };
+  }
+
+  if (mood >= 4 && stress === "Low") {
+    return {
+      prompt,
+      guidance: "Put words to what is working. That makes it easier to protect and repeat.",
+      focus: "Build on what is working. Keep your momentum intentional.",
+    };
+  }
+
+  if (mood >= 4) {
+    return {
+      prompt,
+      guidance: "You seem relatively steady. Take a moment to notice what is helping you move well today.",
+      focus: "Use today's steadiness well. Put attention where it matters most.",
+    };
+  }
+
+  return {
+    prompt,
+    guidance: "Write briefly and honestly. The goal is simply to understand your direction a little better right now.",
+    focus: "Stay oriented. Notice what matters and choose one clear focus for today.",
+  };
 }
 
 export const MOOD_OPTIONS = [
