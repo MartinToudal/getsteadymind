@@ -1,5 +1,28 @@
 import { SessionDefinition } from "@/lib/types";
 
+export const PHASE_DETAILS = {
+  Land: {
+    label: "Awareness",
+    purpose: "Land helps you notice what is true right now before trying to change anything.",
+    practice: "You are training honest self-awareness.",
+  },
+  Clear: {
+    label: "Clarity",
+    purpose: "Clear helps you reduce noise, see patterns, and make space for what matters.",
+    practice: "You are training clarity and discernment.",
+  },
+  Aim: {
+    label: "Direction",
+    purpose: "Aim helps you define what matters, where you want to go, and what feels worth moving toward.",
+    practice: "You are training direction and intentional choice.",
+  },
+  Move: {
+    label: "Momentum",
+    purpose: "Move helps you turn reflection into concrete movement, habits, and follow-through.",
+    practice: "You are training momentum and self-trust in action.",
+  },
+} as const;
+
 export const FOUNDATION_30: SessionDefinition[] = [
   {
     id: "8c7ab420-f1c5-4e93-91eb-a8f5c9cb0001",
@@ -303,4 +326,5 @@ export const FOUNDATION_30: SessionDefinition[] = [
   },
 ];
 
-export const PHASE_ORDER = ["Land", "Clear", "Aim", "Move"];
+export const PHASE_ORDER = ["Land", "Clear", "Aim", "Move"] as const;
+export type FoundationPhase = (typeof PHASE_ORDER)[number];

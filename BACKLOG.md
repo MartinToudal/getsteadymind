@@ -5,14 +5,11 @@
 - [ ] Slet den gamle kompromitterede secret key i Supabase, hvis den ikke allerede er fjernet.
 - [ ] Fortsæt daglig brug i den online app, så vi lærer af reel brug over tid.
 - [ ] Saml løbende feedback fra mobilbrug: navigation, læsbarhed, tempo og friktion i dagens flow.
-- [ ] Gør Daily Pulse endnu mere sammenhængende som en 2-minutters mental fitness praksis.
-- [ ] Finpuds Home som daglig startside, så den føles naturlig i morgenrutinen.
-- [ ] Gør Progress lettere at forstå uden at gøre den tungere visuelt.
+- [ ] Fortsæt med at finjustere Daily Pulse, Home og Progress ud fra reel daglig brug, ikke kun designantagelser.
 
 ## Next
 
 - [ ] Indfør soft pacing i Foundation 30: anbefal én session om dagen uden at låse næste session hårdt.
-- [ ] Gør Foundation 30 mere tydelig som en metode, ikke kun en række spørgsmål.
 - [ ] Gennemgå de første Foundation 30 prompts for at gøre dem mindre tunge eller abstrakte i starten af forløbet.
 - [ ] Overvej lettere onboarding-copy, så brugeren ikke møder for store spørgsmål for tidligt.
 - [ ] Gennemgå mobiloplevelsen side for side og stram spacing, hierarki og navigation der hvor telefonen stadig føles klemt.
@@ -23,6 +20,7 @@
 
 - [ ] Kobl `getsteadymind.dk` og `getsteadymind.com` på Vercel, og beslut hvilken der skal være primær app-URL.
 - [ ] Byg en native app når web-produktets vane og værdi er bevist tydeligt nok til at fortjene det.
+- [ ] Undersøg temabaserede fokusspor, hvor brugeren kan arbejde mere i dybden med et område som bekymring, selvtro, mindfulness eller at lægge mere mærke til egne succeser.
 - [ ] Tilføj Supabase CLI og et rigtigt migrations-flow.
 - [ ] Tilføj enkel testdækning for centrale server actions og page flows ud over de nuværende E2E-tests.
 - [ ] Ryd op i data- og UI-laget, så appen er lettere at udvide efter MVP.
@@ -43,6 +41,7 @@
 - [x] Udvid Playwright-suiten med tests for Progress og re-entry flow.
 - [x] Gør projektet klar til Vercel deployment med produktions-env-vars.
 - [x] Få appen online på Vercel og verificer login og dataflow i produktion.
+- [x] Gør Foundation 30 mere tydelig som en metode, ikke kun en række spørgsmål.
 
 ## Notes
 

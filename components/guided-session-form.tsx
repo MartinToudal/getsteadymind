@@ -5,6 +5,7 @@ import { useFormStatus } from "react-dom";
 import { submitSessionCompletion } from "@/lib/actions";
 import { Button, ButtonLink } from "@/components/button";
 import { Card } from "@/components/card";
+import { PHASE_DETAILS } from "@/lib/program";
 import { FormState, SessionDefinition } from "@/lib/types";
 
 function SubmitButton() {
@@ -21,6 +22,7 @@ export function GuidedSessionForm({ session }: { session: SessionDefinition }) {
   const [responseText, setResponseText] = useState("");
   const [actionStep, setActionStep] = useState("");
   const [state, formAction, pending] = useActionState<FormState, FormData>(submitSessionCompletion, {});
+  const phaseDetail = PHASE_DETAILS[session.phase as keyof typeof PHASE_DETAILS];
 
   if (state.success) {
     return (
@@ -49,8 +51,15 @@ export function GuidedSessionForm({ session }: { session: SessionDefinition }) {
       </p>
       <h1 className="mt-3 text-3xl font-semibold">{session.title}</h1>
       <p className="mt-4 max-w-2xl text-sm leading-7 text-muted">{session.description}</p>
+      {phaseDetail ? (
+        <div className="mt-5 rounded-[24px] border border-border bg-panelAlt p-5">
+          <p className="text-sm uppercase tracking-[0.18em] text-muted">{session.phase} • {phaseDetail.label}</p>
+          <p className="mt-3 text-sm leading-7 text-muted">{phaseDetail.purpose}</p>
+          <p className="mt-3 text-sm text-text">{phaseDetail.practice}</p>
+        </div>
+      ) : null}
       <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">
-        Keep it simple. A few honest sentences are enough for this step.
+        Keep it simple. A few honest sentences are enough for this step. The goal is to practise the skill behind the question, not to write something perfect.
       </p>
 
       <form
