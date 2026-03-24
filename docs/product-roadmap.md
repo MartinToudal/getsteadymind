@@ -164,6 +164,10 @@ But it only makes sense after daily usage, felt value, and method clarity are re
 - introduce a proper migration workflow
 - extend test coverage beyond current E2E flows
 
+Reference:
+
+- see [`docs/pilot-readiness.md`](/Users/martintoudal/Documents/Toudal%20Consulting/Domæner/steadymind/docs/pilot-readiness.md) for the concrete pilot standard and checklist
+
 ### Success signals
 
 - 2-3 pilot users can onboard and use the product without hand-holding
