@@ -11,7 +11,7 @@ export default async function LoginPage() {
     <div className="px-4 pb-10 pt-8 sm:px-6">
       <AuthForm
         title="Sign in"
-        description="Return to your daily reflection rhythm."
+        description="Come back to your daily reflection rhythm. You can always start small."
         action={signIn}
         actionLabel="Sign in"
         alternateHref="/signup"

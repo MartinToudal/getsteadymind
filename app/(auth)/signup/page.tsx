@@ -11,7 +11,7 @@ export default async function SignupPage() {
     <div className="px-4 pb-10 pt-8 sm:px-6">
       <AuthForm
         title="Create account"
-        description="Start the Foundation 30 program and track your daily pulse."
+        description="Begin with a simple daily check-in, then go deeper when it feels useful."
         action={signUp}
         actionLabel="Create account"
         alternateHref="/login"

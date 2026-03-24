@@ -43,6 +43,9 @@ export function AuthForm({
         <p className="text-sm uppercase tracking-[0.24em] text-muted">SteadyMind</p>
         <h1 className="text-3xl font-semibold">{title}</h1>
         <p className="text-sm leading-6 text-muted">{description}</p>
+        <p className="text-sm leading-6 text-muted">
+          This is not about writing something profound. It is about building a steady practice.
+        </p>
       </div>
       <form action={formAction} className="mt-8 space-y-5">
         <input type="hidden" name="next" value={next} />
