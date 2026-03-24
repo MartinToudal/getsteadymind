@@ -7,6 +7,14 @@ export default async function ProgramPage() {
   const user = await requireUser();
   const sessions = await getProgramData(user.id);
   const completedCount = sessions.filter((session) => session.completedAt).length;
+  const nextSession = sessions.find((session) => !session.completedAt) ?? sessions[sessions.length - 1];
+  const latestCompletedAt = sessions
+    .filter((session) => session.completedAt)
+    .map((session) => session.completedAt as string)
+    .sort((a, b) => new Date(b).getTime() - new Date(a).getTime())[0];
+  const completedSessionToday = latestCompletedAt
+    ? new Date(latestCompletedAt).toDateString() === new Date().toDateString()
+    : false;
 
   return (
     <div className="space-y-6">
@@ -33,6 +41,29 @@ export default async function ProgramPage() {
         {completedCount === 0 ? (
           <div className="rounded-[28px] border border-dashed border-border bg-panelAlt p-5 text-sm leading-7 text-muted">
             Start with Session 1 and treat the program as a daily rhythm. One session per day is the recommended pace, but you can continue if it still feels useful.
+          </div>
+        ) : null}
+        {completedCount > 0 ? (
+          <div className="rounded-[28px] border border-border bg-panelAlt p-5">
+            <p className="text-sm uppercase tracking-[0.18em] text-muted">
+              {completedSessionToday ? "Today" : "Recommended Today"}
+            </p>
+            <h2 className="mt-3 text-xl font-medium">
+              {completedSessionToday ? "You have already completed one session today." : `Session ${nextSession.order} is your next recommended step.`}
+            </h2>
+            <p className="mt-2 max-w-2xl text-sm leading-7 text-muted">
+              {completedSessionToday
+                ? "That is enough for today. Let it settle and come back tomorrow, unless it genuinely feels useful to keep going."
+                : "The best rhythm is still one session per day. You can continue now, but there is no need to rush the program."}
+            </p>
+            <div className="mt-4 flex flex-wrap gap-3">
+              <ButtonLink href={`/today/session/${nextSession.order}`}>
+                {completedSessionToday ? "Continue anyway" : "Start next session"}
+              </ButtonLink>
+              <ButtonLink href="/home" variant="secondary">
+                Back to Home
+              </ButtonLink>
+            </div>
           </div>
         ) : null}
       </Card>
@@ -62,6 +93,9 @@ export default async function ProgramPage() {
                     <p className="mt-2 text-sm text-muted">
                       {session.completedAt ? `Completed ${new Date(session.completedAt).toLocaleDateString("en-US")}` : "Not completed yet"}
                     </p>
+                    {!session.completedAt && session.id === nextSession.id ? (
+                      <p className="mt-2 text-sm text-text">Recommended next session.</p>
+                    ) : null}
                   </div>
                   <ButtonLink href={`/today/session/${session.order}`} variant={session.completedAt ? "secondary" : "primary"}>
                     {session.completedAt ? "Revisit" : "Start"}

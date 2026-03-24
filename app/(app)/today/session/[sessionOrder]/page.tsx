@@ -15,5 +15,7 @@ export default async function SessionPage({
     notFound();
   }
 
-  return <GuidedSessionForm session={session} />;
+  const nextSessionOrder = session.order < 30 ? session.order + 1 : null;
+
+  return <GuidedSessionForm session={session} nextSessionOrder={nextSessionOrder} />;
 }

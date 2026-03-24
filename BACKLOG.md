@@ -9,7 +9,6 @@
 
 ## Next
 
-- [ ] Indfør soft pacing i Foundation 30: anbefal én session om dagen uden at låse næste session hårdt.
 - [ ] Gennemgå de første Foundation 30 prompts for at gøre dem mindre tunge eller abstrakte i starten af forløbet.
 - [ ] Overvej lettere onboarding-copy, så brugeren ikke møder for store spørgsmål for tidligt.
 - [ ] Gennemgå mobiloplevelsen side for side og stram spacing, hierarki og navigation der hvor telefonen stadig føles klemt.
@@ -42,6 +41,7 @@
 - [x] Gør projektet klar til Vercel deployment med produktions-env-vars.
 - [x] Få appen online på Vercel og verificer login og dataflow i produktion.
 - [x] Gør Foundation 30 mere tydelig som en metode, ikke kun en række spørgsmål.
+- [x] Indfør soft pacing i Foundation 30: anbefal én session om dagen uden at låse næste session hårdt.
 
 ## Notes
 

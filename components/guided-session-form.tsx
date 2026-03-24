@@ -18,7 +18,13 @@ function SubmitButton() {
   );
 }
 
-export function GuidedSessionForm({ session }: { session: SessionDefinition }) {
+export function GuidedSessionForm({
+  session,
+  nextSessionOrder,
+}: {
+  session: SessionDefinition;
+  nextSessionOrder: number | null;
+}) {
   const [responseText, setResponseText] = useState("");
   const [actionStep, setActionStep] = useState("");
   const [state, formAction, pending] = useActionState<FormState, FormData>(submitSessionCompletion, {});
@@ -34,8 +40,19 @@ export function GuidedSessionForm({ session }: { session: SessionDefinition }) {
         <p className="mt-3 max-w-2xl text-sm leading-6 text-muted">
           Reflection turns into momentum when you keep one useful next step visible.
         </p>
+        <div className="mt-5 rounded-[24px] border border-border bg-panelAlt p-5">
+          <p className="text-sm uppercase tracking-[0.18em] text-muted">Recommended Pace</p>
+          <p className="mt-3 text-sm leading-7 text-muted">
+            One session per day is still the best rhythm. Let this one settle and come back tomorrow if that feels supportive.
+          </p>
+        </div>
         <div className="mt-6 flex flex-wrap gap-3">
           <ButtonLink href="/home">Return to Home</ButtonLink>
+          {nextSessionOrder ? (
+            <ButtonLink href={`/today/session/${nextSessionOrder}`} variant="secondary">
+              Continue anyway
+            </ButtonLink>
+          ) : null}
           <ButtonLink href="/program" variant="secondary">
             Back to Program
           </ButtonLink>
