@@ -8,10 +8,10 @@ export default async function TodayPage() {
   const { nextSession } = await getDashboardData(user.id);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 sm:space-y-6">
       <Card className="space-y-3">
         <p className="text-sm uppercase tracking-[0.24em] text-muted">Today</p>
-        <h1 className="text-3xl font-semibold sm:text-4xl">Start small, then go deeper if it helps.</h1>
+        <h1 className="text-[2rem] font-semibold leading-tight sm:text-4xl">Start small, then go deeper if it helps.</h1>
         <p className="max-w-2xl text-sm leading-7 text-muted">
           The Daily Pulse is the easiest way in. Foundation 30 is there when you want a little more clarity and direction.
         </p>

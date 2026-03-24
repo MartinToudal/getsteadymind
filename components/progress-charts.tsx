@@ -189,7 +189,7 @@ export function ProgressCharts({
   const insights = buildKeyInsights({ moodTrend, energyTrend, stressTrend });
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 sm:space-y-5">
       {snapshot ? (
         <Card className="space-y-3">
           <div>

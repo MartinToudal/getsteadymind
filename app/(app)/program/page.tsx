@@ -20,7 +20,7 @@ export default async function ProgramPage() {
     <div className="space-y-6">
       <Card className="space-y-4">
         <p className="text-sm uppercase tracking-[0.24em] text-muted">Program</p>
-        <h1 className="text-4xl font-semibold">Foundation 30</h1>
+        <h1 className="text-[2rem] font-semibold leading-tight sm:text-4xl">Foundation 30</h1>
         <p className="max-w-2xl text-sm leading-7 text-muted">
           A 30-session mental fitness program designed to help you notice what is true, build clarity, and turn reflection into direction.
         </p>
@@ -57,10 +57,10 @@ export default async function ProgramPage() {
                 : "The best rhythm is still one session per day. You can continue now, but there is no need to rush the program."}
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
-              <ButtonLink href={`/today/session/${nextSession.order}`}>
+              <ButtonLink href={`/today/session/${nextSession.order}`} className="w-full sm:w-auto">
                 {completedSessionToday ? "Continue anyway" : "Start next session"}
               </ButtonLink>
-              <ButtonLink href="/home" variant="secondary">
+              <ButtonLink href="/home" variant="secondary" className="w-full sm:w-auto">
                 Back to Home
               </ButtonLink>
             </div>
@@ -87,7 +87,7 @@ export default async function ProgramPage() {
                   key={session.id}
                   className="flex flex-col gap-4 rounded-[28px] border border-border bg-panelAlt p-5 sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-sm text-muted">Session {session.order}</p>
                     <h3 className="mt-1 text-lg">{session.title}</h3>
                     <p className="mt-2 text-sm text-muted">
@@ -97,7 +97,11 @@ export default async function ProgramPage() {
                       <p className="mt-2 text-sm text-text">Recommended next session.</p>
                     ) : null}
                   </div>
-                  <ButtonLink href={`/today/session/${session.order}`} variant={session.completedAt ? "secondary" : "primary"}>
+                  <ButtonLink
+                    href={`/today/session/${session.order}`}
+                    variant={session.completedAt ? "secondary" : "primary"}
+                    className="w-full sm:w-auto"
+                  >
                     {session.completedAt ? "Revisit" : "Start"}
                   </ButtonLink>
                 </div>
