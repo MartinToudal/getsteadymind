@@ -2,14 +2,12 @@
 
 ## Now
 
-- [ ] Slet den gamle kompromitterede secret key i Supabase, hvis den ikke allerede er fjernet.
 - [ ] Fortsæt daglig brug i den online app, så vi lærer af reel brug over tid.
 - [ ] Saml løbende feedback fra mobilbrug: navigation, læsbarhed, tempo og friktion i dagens flow.
 - [ ] Fortsæt med at finjustere Daily Pulse, Home og Progress ud fra reel daglig brug, ikke kun designantagelser.
 
 ## Next
 
-- [ ] Gennemgå de første Foundation 30 prompts for at gøre dem mindre tunge eller abstrakte i starten af forløbet.
 - [ ] Overvej lettere onboarding-copy, så brugeren ikke møder for store spørgsmål for tidligt.
 - [ ] Gennemgå mobiloplevelsen side for side og stram spacing, hierarki og navigation der hvor telefonen stadig føles klemt.
 - [ ] Tilføj mere meningsfuld progress-feedback, så brugeren mærker reel udvikling over tid.
@@ -26,6 +24,7 @@
 
 ## Done
 
+- [x] Slet den gamle kompromitterede secret key i Supabase.
 - [x] Rotate Supabase secret key, fordi en nøgle er blevet delt i chatten.
 - [x] Omdøb `SUPABASE_SERVICE_ROLE_KEY` til `SUPABASE_SECRET_KEY` i koden, så navngivningen matcher den faktiske key-type.
 - [x] Verificer manuelt login i lokal app.
@@ -42,6 +41,7 @@
 - [x] Få appen online på Vercel og verificer login og dataflow i produktion.
 - [x] Gør Foundation 30 mere tydelig som en metode, ikke kun en række spørgsmål.
 - [x] Indfør soft pacing i Foundation 30: anbefal én session om dagen uden at låse næste session hårdt.
+- [x] Gennemgå de første Foundation 30 prompts for at gøre dem mindre tunge eller abstrakte i starten af forløbet.
 
 ## Notes
 
