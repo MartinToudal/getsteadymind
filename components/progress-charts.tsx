@@ -7,6 +7,38 @@ function toDayKey(date: string) {
   return new Date(date).toISOString().slice(0, 10);
 }
 
+function getRecentCalendarDayKeys(days: number) {
+  const keys: string[] = [];
+  const today = new Date();
+
+  for (let index = 0; index < days; index += 1) {
+    const date = new Date(today);
+    date.setDate(today.getDate() - index);
+    keys.push(toDayKey(date.toISOString()));
+  }
+
+  return keys;
+}
+
+function getDayStreak(daySet: Set<string>) {
+  let streak = 0;
+  const today = new Date();
+
+  while (true) {
+    const date = new Date(today);
+    date.setDate(today.getDate() - streak);
+    const key = toDayKey(date.toISOString());
+
+    if (!daySet.has(key)) {
+      break;
+    }
+
+    streak += 1;
+  }
+
+  return streak;
+}
+
 function Sparkline({ data, maxValue }: { data: DataPoint[]; maxValue: number }) {
   if (data.length === 0) {
     return <div className="rounded-3xl border border-dashed border-border p-6 text-sm text-muted">No data yet.</div>;
@@ -193,17 +225,25 @@ function buildPracticePatterns({
 }) {
   const patterns: string[] = [];
   const sessionDays = new Set(sessionCompletionDates.map(toDayKey));
-  const recentCheckInDays = Array.from(new Set(moodTrend.slice(-7).map((point) => toDayKey(point.date))));
+  const checkInDays = new Set(moodTrend.map((point) => toDayKey(point.date)));
+  const recentCalendarDays = getRecentCalendarDayKeys(7);
+  const recentCheckInCount = recentCalendarDays.filter((day) => checkInDays.has(day)).length;
+  const checkInStreak = getDayStreak(checkInDays);
 
-  if (recentCheckInDays.length >= 4) {
-    patterns.push(`You checked in on ${recentCheckInDays.length} of your last 7 recorded days, which suggests a fairly steady rhythm.`);
-  } else if (recentCheckInDays.length >= 2) {
-    patterns.push(`You are building a rhythm with ${recentCheckInDays.length} recent check-in days. More consistency may make patterns easier to spot.`);
+  if (checkInStreak >= 2) {
+    patterns.push(`You have checked in for ${checkInStreak} days in a row. That kind of consistency makes the patterns easier to trust.`);
+  } else if (recentCheckInCount >= 4) {
+    patterns.push(`You checked in on ${recentCheckInCount} of the last 7 days, which suggests a fairly steady rhythm.`);
+  } else if (recentCheckInCount >= 2) {
+    patterns.push(`You checked in on ${recentCheckInCount} of the last 7 days. A little more consistency may make patterns easier to spot.`);
   }
 
-  const recentSessionDays = Array.from(new Set(sessionCompletionDates.slice(-7).map(toDayKey)));
-  if (recentSessionDays.length >= 2) {
-    patterns.push(`You completed ${recentSessionDays.length} guided sessions recently. That is enough to start turning reflection into practice.`);
+  const recentSessionCount = recentCalendarDays.filter((day) => sessionDays.has(day)).length;
+  const sessionStreak = getDayStreak(sessionDays);
+  if (sessionStreak >= 2) {
+    patterns.push(`You have completed guided sessions for ${sessionStreak} days in a row. That is a strong practice rhythm.`);
+  } else if (recentSessionCount >= 2) {
+    patterns.push(`You completed guided sessions on ${recentSessionCount} of the last 7 days. That is enough to start turning reflection into practice.`);
   }
 
   if (moodTrend.length >= 4 && sessionDays.size > 0) {
