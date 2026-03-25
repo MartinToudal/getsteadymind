@@ -35,6 +35,7 @@ export type ProgressSummary = {
   moodTrend: Array<{ date: string; value: number }>;
   energyTrend: Array<{ date: string; value: number }>;
   stressTrend: Array<{ date: string; value: number }>;
+  sessionCompletionDates: string[];
 };
 
 export type ReentryState = {

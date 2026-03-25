@@ -16,6 +16,7 @@ export default async function ProgressPage() {
             moodTrend={progress.moodTrend}
             energyTrend={progress.energyTrend}
             stressTrend={progress.stressTrend}
+            sessionCompletionDates={progress.sessionCompletionDates}
           />
           <div className="grid gap-4 md:grid-cols-2">
             <Card>

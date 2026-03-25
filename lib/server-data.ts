@@ -140,7 +140,7 @@ export async function getProgressData(userId: string): Promise<ProgressSummary> 
       .order("created_at", { ascending: true }),
     supabase
       .from("session_completions")
-      .select("id")
+      .select("id, completed_at")
       .eq("user_id", userId),
   ]);
 
@@ -154,6 +154,8 @@ export async function getProgressData(userId: string): Promise<ProgressSummary> 
     moodTrend: typedCheckIns.map((entry) => ({ date: entry.created_at, value: entry.mood })),
     energyTrend: typedCheckIns.map((entry) => ({ date: entry.created_at, value: energyScore[entry.energy] })),
     stressTrend: typedCheckIns.map((entry) => ({ date: entry.created_at, value: stressScore[entry.stress] })),
+    sessionCompletionDates:
+      ((completions as Array<{ completed_at: string }> | null) ?? []).map((entry) => entry.completed_at),
   };
 }
 

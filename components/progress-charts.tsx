@@ -3,6 +3,10 @@ import { formatDate } from "@/lib/utils";
 
 type DataPoint = { date: string; value: number };
 
+function toDayKey(date: string) {
+  return new Date(date).toISOString().slice(0, 10);
+}
+
 function Sparkline({ data, maxValue }: { data: DataPoint[]; maxValue: number }) {
   if (data.length === 0) {
     return <div className="rounded-3xl border border-dashed border-border p-6 text-sm text-muted">No data yet.</div>;
@@ -176,17 +180,89 @@ function buildKeyInsights({
   return insights.slice(0, 3);
 }
 
-export function ProgressCharts({
+function buildPracticePatterns({
   moodTrend,
   energyTrend,
   stressTrend,
+  sessionCompletionDates,
 }: {
   moodTrend: DataPoint[];
   energyTrend: DataPoint[];
   stressTrend: DataPoint[];
+  sessionCompletionDates: string[];
+}) {
+  const patterns: string[] = [];
+  const sessionDays = new Set(sessionCompletionDates.map(toDayKey));
+  const recentCheckInDays = Array.from(new Set(moodTrend.slice(-7).map((point) => toDayKey(point.date))));
+
+  if (recentCheckInDays.length >= 4) {
+    patterns.push(`You checked in on ${recentCheckInDays.length} of your last 7 recorded days, which suggests a fairly steady rhythm.`);
+  } else if (recentCheckInDays.length >= 2) {
+    patterns.push(`You are building a rhythm with ${recentCheckInDays.length} recent check-in days. More consistency may make patterns easier to spot.`);
+  }
+
+  const recentSessionDays = Array.from(new Set(sessionCompletionDates.slice(-7).map(toDayKey)));
+  if (recentSessionDays.length >= 2) {
+    patterns.push(`You completed ${recentSessionDays.length} guided sessions recently. That is enough to start turning reflection into practice.`);
+  }
+
+  if (moodTrend.length >= 4 && sessionDays.size > 0) {
+    const sessionDayMood = moodTrend
+      .filter((point) => sessionDays.has(toDayKey(point.date)))
+      .map((point) => point.value);
+    const nonSessionDayMood = moodTrend
+      .filter((point) => !sessionDays.has(toDayKey(point.date)))
+      .map((point) => point.value);
+
+    if (sessionDayMood.length >= 2 && nonSessionDayMood.length >= 2) {
+      const moodDifference = average(sessionDayMood) - average(nonSessionDayMood);
+
+      if (moodDifference >= 0.5) {
+        patterns.push("Days that include a guided session also tend to come with better mood. That may be a pattern worth protecting.");
+      } else if (moodDifference <= -0.5) {
+        patterns.push("Guided sessions seem to happen more on heavier days, which may mean you are already using them as support when needed.");
+      }
+    }
+  }
+
+  if (stressTrend.length >= 4 && sessionDays.size > 0) {
+    const sessionDayStress = stressTrend
+      .filter((point) => sessionDays.has(toDayKey(point.date)))
+      .map((point) => point.value);
+    const nonSessionDayStress = stressTrend
+      .filter((point) => !sessionDays.has(toDayKey(point.date)))
+      .map((point) => point.value);
+
+    if (sessionDayStress.length >= 2 && nonSessionDayStress.length >= 2) {
+      const stressDifference = average(sessionDayStress) - average(nonSessionDayStress);
+
+      if (stressDifference <= -0.4) {
+        patterns.push("Stress tends to be lower on days when you complete a guided session. That may be one of the ways the practice is helping.");
+      }
+    }
+  }
+
+  if (patterns.length === 0 && energyTrend.length >= 3) {
+    patterns.push("Keep adding a few more check-ins and sessions. The clearest patterns usually emerge once the rhythm has had a little more time.");
+  }
+
+  return patterns.slice(0, 3);
+}
+
+export function ProgressCharts({
+  moodTrend,
+  energyTrend,
+  stressTrend,
+  sessionCompletionDates,
+}: {
+  moodTrend: DataPoint[];
+  energyTrend: DataPoint[];
+  stressTrend: DataPoint[];
+  sessionCompletionDates: string[];
 }) {
   const snapshot = buildProgressSnapshot({ moodTrend, energyTrend, stressTrend });
   const insights = buildKeyInsights({ moodTrend, energyTrend, stressTrend });
+  const practicePatterns = buildPracticePatterns({ moodTrend, energyTrend, stressTrend, sessionCompletionDates });
 
   return (
     <div className="space-y-4 sm:space-y-5">
@@ -209,6 +285,21 @@ export function ProgressCharts({
             {insights.map((insight) => (
               <p key={insight} className="text-sm leading-7 text-muted">
                 {insight}
+              </p>
+            ))}
+          </div>
+        </Card>
+      ) : null}
+      {practicePatterns.length > 0 ? (
+        <Card className="space-y-3">
+          <div>
+            <p className="text-sm uppercase tracking-[0.24em] text-muted">Practice patterns</p>
+            <h2 className="mt-2 text-xl font-medium">What may be helping.</h2>
+          </div>
+          <div className="space-y-3">
+            {practicePatterns.map((pattern) => (
+              <p key={pattern} className="text-sm leading-7 text-muted">
+                {pattern}
               </p>
             ))}
           </div>
