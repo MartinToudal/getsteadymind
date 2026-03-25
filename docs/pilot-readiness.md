@@ -97,6 +97,10 @@ These things are useful later, but they are not required for the first pilot:
 - [ ] We know what feedback we want from them.
 - [ ] We know how we will capture that feedback.
 
+Current status:
+
+- see [`docs/pilot-readiness-status.md`](/Users/martintoudal/Documents/Toudal%20Consulting/Domæner/steadymind/docs/pilot-readiness-status.md) for the live assessment against this checklist
+
 ## What We Want To Learn In The Pilot
 
 We should ask pilot users about:

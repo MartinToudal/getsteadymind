@@ -8,7 +8,8 @@
 
 ## Next
 
-- [ ] Brug pilot-readiness checklisten til at vurdere, hvornår de første 2-3 pilotbrugere kan inviteres ind.
+- [ ] Vælg de første 2-3 pilotkandidater ud fra den definerede pilotprofil.
+- [ ] Definér hvordan pilotfeedback skal indsamles, fx kort interview eller faste skriftlige spørgsmål.
 
 ## Later
 
@@ -43,6 +44,7 @@
 - [x] Gennemgå mobiloplevelsen side for side og stram spacing, hierarki og navigation der hvor telefonen stadig føles klemt.
 - [x] Tilføj mere meningsfuld progress-feedback, så brugeren mærker reel udvikling over tid.
 - [x] Definér hvad der skal være på plads, før de første 2-3 pilotbrugere inviteres ind.
+- [x] Brug pilot-readiness checklisten til at vurdere, hvornår de første 2-3 pilotbrugere kan inviteres ind.
 
 ## Notes
 
