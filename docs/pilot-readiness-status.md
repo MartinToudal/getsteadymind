@@ -148,6 +148,10 @@ Suggested pilot profile:
 - likely to use phone-first
 - willing to give thoughtful feedback
 
+Reference:
+
+- see [`docs/pilot-plan.md`](/Users/martintoudal/Documents/Toudal%20Consulting/Domæner/steadymind/docs/pilot-plan.md) for the recommended pilot profile and selection guidance
+
 ### 9. We know what feedback we want from them
 
 Status:
@@ -176,6 +180,10 @@ Suggested first version:
   - what felt unclear
   - what felt useful
   - what made you come back or not come back
+
+Reference:
+
+- see [`docs/pilot-plan.md`](/Users/martintoudal/Documents/Toudal%20Consulting/Domæner/steadymind/docs/pilot-plan.md) for the proposed interview format, feedback questions, and invite draft
 
 ## Current Recommendation
 

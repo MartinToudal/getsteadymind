@@ -8,8 +8,7 @@
 
 ## Next
 
-- [ ] Vælg de første 2-3 pilotkandidater ud fra den definerede pilotprofil.
-- [ ] Definér hvordan pilotfeedback skal indsamles, fx kort interview eller faste skriftlige spørgsmål.
+- [ ] Lav en shortlist med 3-5 konkrete pilotkandidater og vælg de bedste 2-3.
 
 ## Later
 
@@ -45,6 +44,7 @@
 - [x] Tilføj mere meningsfuld progress-feedback, så brugeren mærker reel udvikling over tid.
 - [x] Definér hvad der skal være på plads, før de første 2-3 pilotbrugere inviteres ind.
 - [x] Brug pilot-readiness checklisten til at vurdere, hvornår de første 2-3 pilotbrugere kan inviteres ind.
+- [x] Vælg pilotprofil og definér hvordan pilotfeedback skal indsamles.
 
 ## Notes
 
