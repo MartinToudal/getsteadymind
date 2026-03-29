@@ -111,3 +111,7 @@ The next real action is:
 
 - make a shortlist of 3-5 possible people
 - then choose the best 2-3 from that list
+
+Reference:
+
+- use [`docs/pilot-shortlist.md`](/Users/martintoudal/Documents/Toudal%20Consulting/Domæner/steadymind/docs/pilot-shortlist.md) as the working sheet for comparing candidates

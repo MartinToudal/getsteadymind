@@ -8,7 +8,7 @@
 
 ## Next
 
-- [ ] Lav en shortlist med 3-5 konkrete pilotkandidater og vælg de bedste 2-3.
+- [ ] Udfyld pilot-shortlisten med 3-5 konkrete navne og vælg de bedste 2-3.
 
 ## Later
 
@@ -45,6 +45,7 @@
 - [x] Definér hvad der skal være på plads, før de første 2-3 pilotbrugere inviteres ind.
 - [x] Brug pilot-readiness checklisten til at vurdere, hvornår de første 2-3 pilotbrugere kan inviteres ind.
 - [x] Vælg pilotprofil og definér hvordan pilotfeedback skal indsamles.
+- [x] Opret en konkret shortlist-skabelon til valg af de første pilotbrugere.
 
 ## Notes
 
